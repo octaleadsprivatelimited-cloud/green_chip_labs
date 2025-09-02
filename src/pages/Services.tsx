@@ -162,18 +162,29 @@ const Services: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1>Professional Smart Home Services</h1>
-            <p>
-              Transform your home with our comprehensive range of IoT smart home automation services. 
-              From consultation to installation and ongoing support, we provide international-standard solutions.
-            </p>
-            <div className="hero-buttons">
-              <a href="/contact" className="btn btn-primary">
-                Get Free Consultation <ArrowRight size={20} />
-              </a>
-              <a href="#services" className="btn btn-secondary">
-                View All Services
-              </a>
+            <div className="hero-grid">
+              <div className="hero-text">
+                <h1>Professional Smart Home Services</h1>
+                <p>
+                  Transform your home with our comprehensive range of IoT smart home automation services. 
+                  From consultation to installation and ongoing support, we provide international-standard solutions.
+                </p>
+                <div className="hero-buttons">
+                  <a href="/contact" className="btn btn-primary">
+                    Get Free Consultation <ArrowRight size={20} />
+                  </a>
+                  <a href="#services" className="btn btn-secondary">
+                    View All Services
+                  </a>
+                </div>
+              </div>
+              <div className="hero-image">
+                <img 
+                  src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                  alt="Smart Home IoT Services" 
+                  className="hero-img"
+                />
+              </div>
             </div>
           </motion.div>
         </div>

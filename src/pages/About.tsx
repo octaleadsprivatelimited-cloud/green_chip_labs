@@ -5,17 +5,16 @@ import {
   Eye,
   Users,
   Award,
+  TrendingUp,
   Globe,
   Shield,
   Zap,
-  Heart,
-  TrendingUp,
+  ArrowRight,
+  CheckCircle,
   Star,
-  Clock,
-  MapPin,
-  Phone,
-  Mail,
-  ArrowRight
+  Building,
+  Lightbulb,
+  Heart
 } from 'lucide-react';
 import Layout from '../components/Layout';
 import ContactForm from '../components/ContactForm';
@@ -42,68 +41,96 @@ const About: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  const stats = [
+    { number: "10,000+", label: "Happy Customers", icon: Users },
+    { number: "50+", label: "Countries Served", icon: Globe },
+    { number: "15+", label: "Years Experience", icon: Award },
+    { number: "99.9%", label: "Uptime Guarantee", icon: Shield }
+  ];
+
   const values = [
     {
+      icon: Target,
+      title: "Innovation",
+      description: "We continuously push the boundaries of smart home technology to deliver cutting-edge solutions that exceed expectations."
+    },
+    {
       icon: Heart,
-      title: "Customer-Centric",
-      description: "We put our customers at the heart of everything we do, ensuring their needs and satisfaction drive our innovation and service delivery."
+      title: "Customer Focus",
+      description: "Our customers are at the heart of everything we do. We listen, understand, and deliver solutions that truly make a difference."
     },
     {
       icon: Shield,
-      title: "Quality & Reliability",
-      description: "We maintain the highest standards of quality and reliability in all our products and services, backed by international certifications."
+      title: "Reliability",
+      description: "We build systems that work consistently, day after day, providing peace of mind and long-term value for our customers."
     },
     {
-      icon: Globe,
-      title: "Global Perspective",
-      description: "We serve customers worldwide with localized solutions, understanding diverse needs and cultural contexts across different markets."
-    },
-    {
-      icon: Zap,
-      title: "Innovation",
-      description: "We continuously push the boundaries of smart home technology, staying ahead of industry trends and emerging technologies."
+      icon: Lightbulb,
+      title: "Excellence",
+      description: "We strive for excellence in every project, from initial consultation to final installation and ongoing support."
     }
-  ];
-
-  const achievements = [
-    { number: "10,000+", label: "Happy Customers", icon: Users },
-    { number: "50+", label: "Countries Served", icon: Globe },
-    { number: "99.9%", label: "Uptime Guarantee", icon: Shield },
-    { number: "24/7", label: "Global Support", icon: Clock }
   ];
 
   const team = [
     {
       name: "Sarah Johnson",
       role: "CEO & Founder",
-      image: "SJ",
-      description: "15+ years in IoT and smart home technology, former VP at leading tech companies."
+      description: "15+ years in smart home automation with a vision to make technology accessible to everyone.",
+      image: "SJ"
     },
     {
       name: "Michael Chen",
       role: "CTO",
-      image: "MC",
-      description: "Expert in AI and machine learning, PhD in Computer Science from MIT."
+      description: "Expert in IoT architecture and system integration, leading our technical innovation efforts.",
+      image: "MC"
     },
     {
       name: "Emily Rodriguez",
       role: "Head of Design",
-      image: "ER",
-      description: "Award-winning UX designer with focus on accessible smart home interfaces."
+      description: "Passionate about creating intuitive user experiences that make smart homes truly smart.",
+      image: "ER"
     },
     {
       name: "David Kim",
-      role: "Head of Engineering",
-      image: "DK",
-      description: "Senior engineer with expertise in IoT protocols and security systems."
+      role: "Lead Engineer",
+      description: "Specializes in energy-efficient solutions and sustainable smart home technologies.",
+      image: "DK"
+    }
+  ];
+
+  const milestones = [
+    {
+      year: "2008",
+      title: "Company Founded",
+      description: "Started with a vision to revolutionize home automation"
+    },
+    {
+      year: "2012",
+      title: "First Major Contract",
+      description: "Secured partnership with leading real estate developers"
+    },
+    {
+      year: "2016",
+      title: "International Expansion",
+      description: "Expanded operations to 25 countries worldwide"
+    },
+    {
+      year: "2020",
+      title: "AI Integration",
+      description: "Launched AI-powered smart home management platform"
+    },
+    {
+      year: "2024",
+      title: "Sustainability Focus",
+      description: "Achieved carbon-neutral operations and green certification"
     }
   ];
 
   return (
     <Layout
-      title="About Us - Green Chip Labs | Leading Smart Home Automation Company"
-      description="Learn about Green Chip Labs, a leading international smart home automation company. Discover our mission, vision, values, and the expert team behind our innovative IoT solutions."
-      keywords="about us, smart home company, IoT team, automation experts, green technology, international company"
+      title="About Us - Green Chip Labs"
+      description="Learn about Green Chip Labs' mission to revolutionize smart home automation. Meet our expert team and discover our commitment to innovation and customer satisfaction."
+      keywords="about Green Chip Labs, smart home company, IoT team, home automation experts, company history"
       canonical="/about"
     >
       {/* Hero Section */}
@@ -115,96 +142,136 @@ const About: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1>About Green Chip Labs</h1>
-            <p>
-              We are a leading international smart home automation company dedicated to transforming 
-              ordinary homes into intelligent, energy-efficient living spaces. With a global presence 
-              and cutting-edge technology, we're revolutionizing how people interact with their homes.
-            </p>
+            <div className="hero-grid">
+              <div className="hero-text">
+                <h1>About Green Chip Labs</h1>
+                <p>
+                  We are passionate innovators dedicated to transforming homes with intelligent automation. 
+                  Our mission is to make smart home technology accessible, reliable, and truly beneficial for everyone.
+                </p>
+                <div className="hero-buttons">
+                  <a href="#our-story" className="btn btn-primary btn-large">
+                    Our Story
+                    <ArrowRight size={20} />
+                  </a>
+                  <a href="#team" className="btn btn-secondary btn-large">
+                    Meet Our Team
+                  </a>
+                </div>
+              </div>
+              <div className="hero-image">
+                <img 
+                  src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                  alt="Smart Home Technology Team" 
+                  className="hero-img"
+                />
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Mission & Vision Section */}
+      {/* Stats Section */}
       <section className="section">
+        <div className="container">
+          <div className="fade-in-delay-1">
+            <h2 className="section-title">Our Impact</h2>
+            <p className="section-subtitle">
+              Numbers that reflect our commitment to excellence and customer satisfaction
+            </p>
+          </div>
+          
+          <div className="grid grid-4">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={index}
+                className="stat-card slide-in-left"
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <div className="stat-icon">
+                  <stat.icon size={32} />
+                </div>
+                <div className="stat-number">{stat.number}</div>
+                <div className="stat-label">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Mission & Vision Section */}
+      <section id="our-story" className="section bg-light">
         <div className="container">
           <div className="mission-vision-grid">
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
+              className="mission-section slide-in-left"
+              initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.6 }}
             >
-              <div className="mission-section">
-                <div className="section-header">
-                  <Target size={32} className="section-icon" />
-                  <h2>Our Mission</h2>
+              <div className="section-header">
+                <div className="section-icon">
+                  <Target size={32} />
                 </div>
-                <p>
-                  To democratize smart home technology by providing affordable, reliable, and 
-                  user-friendly IoT solutions that enhance quality of life while promoting 
-                  environmental sustainability across the globe.
-                </p>
+                <h2>Our Mission</h2>
               </div>
-
-              <div className="vision-section">
-                <div className="section-header">
-                  <Eye size={32} className="section-icon" />
-                  <h2>Our Vision</h2>
-                </div>
-                <p>
-                  To become the world's most trusted smart home automation company, setting the 
-                  standard for innovation, quality, and customer satisfaction in the international IoT industry.
-                </p>
-              </div>
+              <p>
+                To democratize smart home technology by creating intuitive, reliable, and affordable 
+                automation solutions that enhance the quality of life for families worldwide. We believe 
+                that everyone deserves a home that works intelligently for them.
+              </p>
             </motion.div>
 
             <motion.div
-              className="about-stats"
-              initial={{ opacity: 0, x: 50 }}
+              className="vision-section slide-in-right"
+              initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.6 }}
             >
-              <h3>Our Impact</h3>
-              <div className="stats-grid">
-                {achievements.map((achievement, index) => (
-                  <div key={index} className="stat-item">
-                    <div className="stat-icon">
-                      <achievement.icon size={24} />
-                    </div>
-                    <div className="stat-number">{achievement.number}</div>
-                    <div className="stat-label">{achievement.label}</div>
-                  </div>
-                ))}
+              <div className="section-header">
+                <div className="section-icon">
+                  <Eye size={32} />
+                </div>
+                <h2>Our Vision</h2>
               </div>
+              <p>
+                To be the global leader in smart home automation, setting the standard for innovation, 
+                sustainability, and customer satisfaction. We envision a future where every home is 
+                intelligent, energy-efficient, and perfectly tailored to its occupants' needs.
+              </p>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Values Section */}
-      <section className="section values-section">
+      <section className="section">
         <div className="container">
-          <div className="fade-in">
-            <h2 className="section-title">Our Core Values</h2>
+          <div className="fade-in-delay-2">
+            <h2 className="section-title">Our Values</h2>
             <p className="section-subtitle">
-              These fundamental principles guide everything we do and shape our company culture
+              The principles that guide everything we do and every decision we make
             </p>
           </div>
           
-          <div className="grid grid-2">
+          <div className="values-container">
             {values.map((value, index) => (
               <motion.div
                 key={index}
-                className="card slide-in-left"
+                className="value-block slide-in-left"
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <div className="card-icon">
-                  <value.icon size={28} />
+                <div className="value-block-header">
+                  <div className="value-block-icon">
+                    <value.icon size={24} />
+                  </div>
+                  <h3 className="value-block-title">{value.title}</h3>
                 </div>
-                <h3>{value.title}</h3>
-                <p>{value.description}</p>
+                <p className="value-block-description">{value.description}</p>
               </motion.div>
             ))}
           </div>
@@ -212,13 +279,12 @@ const About: React.FC = () => {
       </section>
 
       {/* Team Section */}
-      <section className="section">
+      <section id="team" className="section bg-light">
         <div className="container">
-          <div className="fade-in">
-            <h2 className="section-title">Meet Our Expert Team</h2>
+          <div className="fade-in-delay-3">
+            <h2 className="section-title">Meet Our Team</h2>
             <p className="section-subtitle">
-              Our diverse team of professionals brings together decades of experience in IoT, 
-              smart home technology, and customer service excellence.
+              The passionate experts behind Green Chip Labs' success
             </p>
           </div>
           
@@ -226,17 +292,19 @@ const About: React.FC = () => {
             {team.map((member, index) => (
               <motion.div
                 key={index}
-                className="card team-card slide-in-right"
+                className="team-card slide-in-right"
                 initial={{ opacity: 0, x: 30 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <div className="team-avatar">
                   {member.image}
                 </div>
-                <h3>{member.name}</h3>
-                <p className="team-role">{member.role}</p>
-                <p className="team-description">{member.description}</p>
+                <div className="team-content">
+                  <h3>{member.name}</h3>
+                  <div className="team-role">{member.role}</div>
+                  <p className="team-description">{member.description}</p>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -244,67 +312,61 @@ const About: React.FC = () => {
       </section>
 
       {/* Company Story Section */}
-      <section className="section company-story-section">
+      <section className="section">
         <div className="container">
-          <div className="story-content">
+          <div className="company-story-section">
             <motion.div
-              className="story-text"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
+              className="story-content fade-in"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h2>Our Story</h2>
-              <p>
-                Founded in 2020 by a team of passionate IoT engineers and smart home enthusiasts, 
-                Green Chip Labs began with a simple vision: to make smart home technology accessible 
-                to everyone, everywhere.
-              </p>
-              <p>
-                Starting as a small startup in Silicon Valley, we've grown into an international 
-                company serving customers across 50+ countries. Our journey has been marked by 
-                continuous innovation, customer satisfaction, and a commitment to environmental 
-                sustainability.
-              </p>
-              <p>
-                Today, we're proud to be at the forefront of the smart home revolution, helping 
-                thousands of families create more comfortable, secure, and energy-efficient homes 
-                through cutting-edge IoT solutions.
-              </p>
-            </motion.div>
-
-            <motion.div
-              className="story-highlights"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <div className="highlight-item">
-                <div className="highlight-icon">
-                  <Award size={24} />
-                </div>
-                <div>
-                  <h4>Industry Recognition</h4>
-                  <p>Winner of "Best Smart Home Solution" at IoT World Awards 2023</p>
-                </div>
+              <h2>Our Journey</h2>
+              <div className="story-text">
+                <p>
+                  Founded in 2008, Green Chip Labs began as a small team of passionate engineers 
+                  who believed that smart home technology could be more than just a luxury. We started 
+                  in a small garage, developing our first automation system for a local family.
+                </p>
+                <p>
+                  Today, we've grown into a global company serving thousands of customers worldwide. 
+                  Our journey has been marked by continuous innovation, from our early days of basic 
+                  automation to our current AI-powered smart home ecosystems.
+                </p>
+                <p>
+                  What sets us apart is our unwavering commitment to making technology work for people, 
+                  not the other way around. Every product we develop, every system we install, and every 
+                  customer we serve reflects this core belief.
+                </p>
               </div>
               
-              <div className="highlight-item">
-                <div className="highlight-icon">
-                  <TrendingUp size={24} />
+              <div className="story-highlights">
+                <div className="highlight-item">
+                  <div className="highlight-icon">
+                    <TrendingUp size={24} />
+                  </div>
+                  <div>
+                    <h4>Continuous Growth</h4>
+                    <p>Expanding our reach and capabilities year after year</p>
+                  </div>
                 </div>
-                <div>
-                  <h4>Rapid Growth</h4>
-                  <p>300% year-over-year growth in customer base and revenue</p>
+                <div className="highlight-item">
+                  <div className="highlight-icon">
+                    <Award size={24} />
+                  </div>
+                  <div>
+                    <h4>Industry Recognition</h4>
+                    <p>Multiple awards for innovation and customer satisfaction</p>
+                  </div>
                 </div>
-              </div>
-              
-              <div className="highlight-item">
-                <div className="highlight-icon">
-                  <Star size={24} />
-                </div>
-                <div>
-                  <h4>Customer Satisfaction</h4>
-                  <p>4.9/5 average rating from 10,000+ customer reviews</p>
+                <div className="highlight-item">
+                  <div className="highlight-icon">
+                    <Globe size={24} />
+                  </div>
+                  <div>
+                    <h4>Global Impact</h4>
+                    <p>Making smart homes accessible worldwide</p>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -312,63 +374,69 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="section">
+      {/* Timeline Section */}
+      <section className="section bg-light">
         <div className="container">
-          <div className="fade-in">
-            <h2 className="section-title">Get in Touch</h2>
+          <div className="fade-in-delay-4">
+            <h2 className="section-title">Our Milestones</h2>
             <p className="section-subtitle">
-              Ready to transform your home? Contact our team of experts for a personalized consultation.
+              Key moments that shaped our journey and growth
             </p>
           </div>
           
-          <div className="contact-info-grid">
-            <div className="contact-info-item">
-              <div className="contact-icon">
-                <MapPin size={24} />
-              </div>
-              <div>
-                <h4>Visit Our Office</h4>
-                <p>123 Smart Technology Ave<br />Innovation District, Tech City 12345</p>
-              </div>
-            </div>
-            
-            <div className="contact-info-item">
-              <div className="contact-icon">
-                <Phone size={24} />
-              </div>
-              <div>
-                <h4>Call Us</h4>
-                <p>+1 (555) 123-4567<br />Mon-Fri 9AM-6PM EST</p>
-              </div>
-            </div>
-            
-            <div className="contact-info-item">
-              <div className="contact-icon">
-                <Mail size={24} />
-              </div>
-              <div>
-                <h4>Email Us</h4>
-                <p>info@greenchiplabs.com<br />We respond within 24 hours</p>
-              </div>
-            </div>
+          <div className="timeline">
+            {milestones.map((milestone, index) => (
+              <motion.div
+                key={index}
+                className="timeline-item slide-in-left"
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <div className="timeline-year">{milestone.year}</div>
+                <div className="timeline-content">
+                  <h3>{milestone.title}</h3>
+                  <p>{milestone.description}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
-          
-          <div className="contact-cta">
-            <a href="/contact" className="btn btn-primary">
-              Schedule Free Consultation <ArrowRight size={20} />
-            </a>
-          </div>
+        </div>
+      </section>
+
+      {/* Contact CTA Section */}
+      <section className="section">
+        <div className="container">
+          <motion.div
+            className="contact-cta fade-in"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2>Ready to Work With Us?</h2>
+            <p>
+              Join thousands of satisfied customers who have transformed their homes with our 
+              smart automation solutions. Let's discuss how we can help you achieve your vision.
+            </p>
+            <div className="cta-buttons">
+              <a href="/contact" className="btn btn-primary btn-large">
+                Get Started Today
+              </a>
+              <a href="/portfolio" className="btn btn-secondary btn-large">
+                View Our Work
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Contact Form Section */}
-      <section className="section contact-form-section">
-        <div className="container">
+      <section className="section bg-light">
+        <div className="container container-narrow">
           <div className="fade-in">
-            <h2 className="section-title">Have Questions?</h2>
+            <h2 className="section-title">Get in Touch</h2>
             <p className="section-subtitle">
-              Send us a message and our team will get back to you with personalized solutions.
+              Have questions about our services or want to discuss your project?
             </p>
           </div>
           <ContactForm />

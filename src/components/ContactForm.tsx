@@ -1,157 +1,202 @@
 import React, { useState } from 'react';
-import { Send, CheckCircle, User, Mail, Phone, MessageSquare, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Send, CheckCircle, AlertCircle } from 'lucide-react';
+
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  service: string;
+  message: string;
+}
 
 const ContactForm: React.FC = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     phone: '',
+    service: '',
     message: ''
   });
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    console.log('Form submitted:', formData);
-    setIsSubmitted(true);
-    setIsSubmitting(false);
-    
-    // Reset form after 4 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
+    // Simulate form submission
+    try {
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      setSubmitStatus('success');
       setFormData({
         name: '',
         email: '',
         phone: '',
+        service: '',
         message: ''
       });
-    }, 4000);
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  if (isSubmitted) {
-    return (
-      <div className="contact-form-success">
-        <div className="success-icon">
-          <CheckCircle size={48} />
-        </div>
-        <h3>Message Sent Successfully!</h3>
-        <p>We'll get back to you within 24 hours with a personalized solution.</p>
-      </div>
-    );
-  }
-
   return (
-    <div className="contact-form-container">
-      <div className="contact-form-header">
-        <h3>Get Your Free Quote</h3>
-        <p>Tell us about your project and we'll provide a customized solution.</p>
-      </div>
-      
-      <form className="contact-form" onSubmit={handleSubmit}>
+    <motion.div
+      className="contact-form"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      <h3>Get Your Free Consultation</h3>
+      <p className="form-description">
+        Tell us about your project and we'll create a personalized smart home solution for you.
+      </p>
+
+      {submitStatus === 'success' && (
+        <motion.div
+          className="form-success"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <CheckCircle size={24} />
+          <div>
+            <h4>Thank you for your inquiry!</h4>
+            <p>We'll get back to you within 24 hours with a personalized consultation.</p>
+          </div>
+        </motion.div>
+      )}
+
+      {submitStatus === 'error' && (
+        <motion.div
+          className="form-error"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <AlertCircle size={24} />
+          <div>
+            <h4>Something went wrong</h4>
+            <p>Please try again or contact us directly at info@greenchiplabs.com</p>
+          </div>
+        </motion.div>
+      )}
+
+      <form onSubmit={handleSubmit} className="form">
         <div className="form-row">
           <div className="form-group">
-            <label htmlFor="name">
-              <User size={16} />
-              Full Name *
-            </label>
+            <label htmlFor="name" className="form-label">Full Name</label>
             <input
               type="text"
               id="name"
               name="name"
               value={formData.name}
               onChange={handleChange}
+              className="form-input"
+              placeholder="Enter your full name"
               required
-              placeholder="Your full name"
             />
           </div>
-
+          
           <div className="form-group">
-            <label htmlFor="email">
-              <Mail size={16} />
-              Email Address *
-            </label>
+            <label htmlFor="email" className="form-label">Email Address</label>
             <input
               type="email"
               id="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
+              className="form-input"
+              placeholder="Enter your email"
               required
-              placeholder="your@email.com"
             />
           </div>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="phone">
-            <Phone size={16} />
-            Phone Number
-          </label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            placeholder="+1 (555) 123-4567"
-          />
+        <div className="form-row">
+          <div className="form-group">
+            <label htmlFor="phone" className="form-label">Phone Number</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              className="form-input"
+              placeholder="Enter your phone number"
+            />
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="service" className="form-label">Service Interest</label>
+            <select
+              id="service"
+              name="service"
+              value={formData.service}
+              onChange={handleChange}
+              className="form-select"
+              required
+            >
+              <option value="">Select a service</option>
+              <option value="smart-home">Smart Home Automation</option>
+              <option value="security">Security Systems</option>
+              <option value="energy">Energy Management</option>
+              <option value="lighting">Smart Lighting</option>
+              <option value="climate">Climate Control</option>
+              <option value="integration">IoT Integration</option>
+              <option value="consultation">Free Consultation</option>
+            </select>
+          </div>
         </div>
 
         <div className="form-group">
-          <label htmlFor="message">
-            <MessageSquare size={16} />
-            Project Details *
-          </label>
+          <label htmlFor="message" className="form-label">Project Details</label>
           <textarea
             id="message"
             name="message"
             value={formData.message}
             onChange={handleChange}
-            required
+            className="form-textarea"
+            placeholder="Tell us about your project, timeline, and any specific requirements..."
             rows={4}
-            placeholder="Briefly describe your smart home project requirements..."
+            required
           />
         </div>
 
-        <button 
-          type="submit" 
-          className="contact-form-btn"
+        <button
+          type="submit"
+          className={`btn btn-primary btn-large form-submit ${isSubmitting ? 'loading' : ''}`}
           disabled={isSubmitting}
         >
           {isSubmitting ? (
             <>
-              <div className="spinner" />
+              <div className="loading-spinner"></div>
               Sending...
             </>
           ) : (
             <>
-              <Send size={18} />
-              Get Free Quote
-              <ArrowRight size={16} />
+              Send Message
+              <Send size={20} />
             </>
           )}
         </button>
 
-        <div className="form-footer">
-          <p>✓ Free consultation included</p>
-          <p>✓ 24-hour response guarantee</p>
-          <p>✓ No obligation quote</p>
-        </div>
+        <p className="form-note">
+          By submitting this form, you agree to our privacy policy. We'll never share your information.
+        </p>
       </form>
-    </div>
+    </motion.div>
   );
 };
 

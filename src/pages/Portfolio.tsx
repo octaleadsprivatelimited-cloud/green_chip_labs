@@ -8,8 +8,6 @@ import {
   MapPin,
   Home,
   Zap,
-  Filter,
-  Search,
   Star,
   Award,
   CheckCircle
@@ -18,8 +16,6 @@ import Layout from '../components/Layout';
 import ContactForm from '../components/ContactForm';
 
 const Portfolio: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     // Add scroll animations
@@ -42,12 +38,7 @@ const Portfolio: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  const categories = [
-    { id: 'all', name: 'All Projects', count: 24 },
-    { id: 'residential', name: 'Residential', count: 15 },
-    { id: 'commercial', name: 'Commercial', count: 6 },
-    { id: 'luxury', name: 'Luxury', count: 3 }
-  ];
+
 
   const projects = [
     {
@@ -136,13 +127,7 @@ const Portfolio: React.FC = () => {
     }
   ];
 
-  const filteredProjects = projects.filter(project => {
-    const matchesCategory = selectedCategory === 'all' || project.category === selectedCategory;
-    const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         project.location.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+
 
   const stats = [
     { number: "500+", label: "Projects Completed", icon: Home },
@@ -167,18 +152,29 @@ const Portfolio: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1>Our Portfolio</h1>
-            <p>
-              Discover our successful smart home automation projects across residential, commercial, 
-              and luxury properties. See how we've transformed spaces with cutting-edge technology.
-            </p>
-            <div className="hero-buttons">
-              <a href="#projects" className="btn btn-primary">
-                View Projects <ArrowRight size={20} />
-              </a>
-              <a href="/contact" className="btn btn-secondary">
-                Start Your Project
-              </a>
+            <div className="hero-grid">
+              <div className="hero-text">
+                <h1>Our Portfolio</h1>
+                <p>
+                  Discover our successful smart home automation projects across residential, commercial, 
+                  and luxury properties. See how we've transformed spaces with cutting-edge technology.
+                </p>
+                <div className="hero-buttons">
+                  <a href="#projects" className="btn btn-primary">
+                    View Projects <ArrowRight size={20} />
+                  </a>
+                  <a href="/contact" className="btn btn-secondary">
+                    Start Your Project
+                  </a>
+                </div>
+              </div>
+              <div className="hero-image">
+                <img 
+                  src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                  alt="Smart Home Portfolio Projects" 
+                  className="hero-img"
+                />
+              </div>
             </div>
           </motion.div>
         </div>
@@ -194,59 +190,34 @@ const Portfolio: React.FC = () => {
             </p>
           </div>
           
-          <div className="stats-grid">
+          Featured Projects
+
+<div className="success-stats-container">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
-                className="stat-card slide-in-left"
+                className="success-stat-block slide-in-left"
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <div className="stat-icon">
-                  <stat.icon size={32} />
+                <div className="success-stat-header">
+                  <div className="success-stat-icon">
+                    <stat.icon size={28} />
+                  </div>
+                  <div className="success-stat-number">{stat.number}</div>
                 </div>
-                <div className="stat-number">{stat.number}</div>
-                <div className="stat-label">{stat.label}</div>
+                <div className="success-stat-label">{stat.label}</div>
+                <div className="success-stat-progress">
+                  <div className="progress-bar" style={{ width: `${85 + (index * 5)}%` }}></div>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Search and Filter */}
-      <section className="section">
-        <div className="container">
-          <div className="portfolio-filter-container">
-            <div className="search-box">
-              <Search size={20} />
-              <input
-                type="text"
-                placeholder="Search projects..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="search-input"
-              />
-            </div>
-            
-            <div className="category-filter">
-              <Filter size={20} />
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="filter-select"
-                aria-label="Filter projects by category"
-              >
-                {categories.map(category => (
-                  <option key={category.id} value={category.id}>
-                    {category.name} ({category.count})
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* Projects Grid */}
       <section id="projects" className="section projects-section">
@@ -254,84 +225,93 @@ const Portfolio: React.FC = () => {
           <div className="fade-in">
             <h2 className="section-title">Featured Projects</h2>
             <p className="section-subtitle">
-              {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''} found
+              {projects.length} featured project{projects.length !== 1 ? 's' : ''}
             </p>
           </div>
           
-          <div className="projects-grid">
-            {filteredProjects.map((project, index) => (
+          <div className="featured-projects-container">
+            {projects.map((project, index) => (
               <motion.div
                 key={project.id}
-                className="project-card slide-in-right"
+                className="featured-project-block slide-in-right"
                 initial={{ opacity: 0, x: 30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <div className="project-image">
+                <div className="project-block-header">
+                  <div className="project-category-badge">
+                    {project.category}
+                  </div>
+                  <div className="project-rating">
+                    {[...Array(project.rating)].map((_, i) => (
+                      <Star key={i} size={16} className="star-filled" />
+                    ))}
+                  </div>
+                </div>
+                
+                <div className="project-block-image">
                   <img src={project.image} alt={project.title} />
-                  <div className="project-category">{project.category}</div>
                   <div className="project-overlay">
-                    <a href={`/portfolio/${project.id}`} className="view-project">
+                    <a href={`/portfolio/${project.id}`} className="view-project-btn">
                       <Eye size={20} />
                       View Details
                     </a>
                   </div>
                 </div>
                 
-                <div className="project-content">
-                  <div className="project-header">
-                    <h3 className="project-title">{project.title}</h3>
-                    <div className="project-rating">
-                      {[...Array(project.rating)].map((_, i) => (
-                        <Star key={i} size={16} className="star-filled" />
-                      ))}
-                    </div>
-                  </div>
+                <div className="project-block-content">
+                  <h3 className="project-block-title">{project.title}</h3>
                   
-                  <div className="project-meta">
-                    <div className="project-location">
-                      <MapPin size={14} />
+                  <div className="project-block-meta">
+                    <div className="project-meta-item">
+                      <MapPin size={16} />
                       <span>{project.location}</span>
                     </div>
-                    <div className="project-date">
-                      <Calendar size={14} />
+                    <div className="project-meta-item">
+                      <Calendar size={16} />
                       <span>{new Date(project.date).toLocaleDateString()}</span>
                     </div>
                   </div>
                   
-                  <p className="project-description">{project.description}</p>
+                  <p className="project-block-description">{project.description}</p>
                   
-                  <div className="project-details">
-                    <div className="project-detail">
-                      <Home size={16} />
-                      <span>{project.size}</span>
+                  <div className="project-block-stats">
+                    <div className="project-stat">
+                      <Home size={18} />
+                      <div>
+                        <span className="stat-label">Size</span>
+                        <span className="stat-value">{project.size}</span>
+                      </div>
                     </div>
-                    <div className="project-detail">
-                      <Zap size={16} />
-                      <span>{project.duration}</span>
+                    <div className="project-stat">
+                      <Zap size={18} />
+                      <div>
+                        <span className="stat-label">Duration</span>
+                        <span className="stat-value">{project.duration}</span>
+                      </div>
                     </div>
                   </div>
                   
-                  <div className="project-features">
-                    {project.features.slice(0, 3).map((feature, i) => (
-                      <span key={i} className="feature-tag">
-                        <CheckCircle size={12} />
-                        {feature}
-                      </span>
-                    ))}
-                    {project.features.length > 3 && (
-                      <span className="feature-more">
-                        +{project.features.length - 3} more
-                      </span>
-                    )}
+                  <div className="project-block-features">
+                    <h4>Key Features</h4>
+                    <div className="features-list">
+                      {project.features.slice(0, 4).map((feature, i) => (
+                        <div key={i} className="feature-item">
+                          <CheckCircle size={14} />
+                          <span>{feature}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                   
-                  <blockquote className="project-testimonial">
-                    "{project.testimonial}"
-                  </blockquote>
+                  <div className="project-block-testimonial">
+                    <blockquote>
+                      "{project.testimonial}"
+                    </blockquote>
+                  </div>
                   
-                  <div className="project-actions">
-                    <a href={`/portfolio/${project.id}`} className="btn btn-outline">
+                  <div className="project-block-actions">
+                    <a href={`/portfolio/${project.id}`} className="btn btn-primary">
                       View Case Study <ExternalLink size={16} />
                     </a>
                   </div>
